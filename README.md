@@ -1,5 +1,13 @@
 # App
 
+Para ejecutar la App, es necesario reconstruir los módulos de node usando el comando
+
+```
+npm install
+```
+
+# App
+
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.2.
 
 ## Development server

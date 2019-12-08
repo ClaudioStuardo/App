@@ -1,0 +1,89 @@
+<h2 class="subheader">Usuarios registrados ( <small>{{ totalRegistros }}</small> )</h2>
+
+<br>
+<div class="row">
+    <div class="col-12">
+        <input #input (keyup)="buscarUsuario( input.value )" type="text" class="form-control" placeholder="Buscar usuario por nombre o correo...">
+    </div>
+</div>
+<br>
+<div class="text-right">
+    <button (click)="crearUsuario()" type="button" class="btn waves-effect waves-light btn-rounded btn-primary">
+                <i class="fa fa-plus"></i>
+                Crear usuario
+            </button>
+</div>
+<hr>
+<div class="row" *ngIf="cargando">
+    <div class="col-sm-12">
+        <div class="alert alert-warning text-center">
+            <strong>Cargando</strong>
+            <br>
+            <i class="fa fa-refresh fa-spin fa-2x"></i>
+            <br>
+            <span>Espere por favor</span>
+        </div>
+    </div>
+</div>
+
+<!--Listado articulos-->
+<div *ngIf="!cargando">
+    <div class="article-item" id="article-template" *ngFor="let usuario of usuarios">
+        <div class="container">
+            <div class="row">
+                <div class="col-6">
+                    <div class="image-wrap">
+                        <img (click)="mostrarModal(usuario._id)" [src]="usuario.imagen | imagen" class="pointer w150">
+                    </div>
+                    <span class=" date ">
+                <label *ngIf="!usuario.activo" style="color:red" class="label label-danger "><i class="fa fa-times-circle "></i>  Desactivo</label>
+                <label *ngIf="usuario.activo" style="color:green" class="label label-info "><i class="fa fa-check-circle "></i  >  Activo</label>
+                        </span>
+                    <div class="row ">
+                        <div class="col-4 ">
+                            <h4>Nombre: </h4>
+                        </div>
+                        <div class="col-8 ">
+                            <input [(ngModel)]="usuario.nombreUsuario " name="titulo " type="text " class="form-control " placeholder="Nombre de usuario ">
+                        </div>
+                    </div>
+
+                    <div class="row ">
+                        <div class="col-4 ">
+                            <h4>Correo: </h4>
+                        </div>
+                        <div class="col-8 ">
+                            <input [(ngModel)]="usuario.correo " name="titulo " type="email " class="form-control " placeholder="Correo de usuario ">
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6 ">
+                    <br><br>
+                    <div class="text-left ">
+                        <button (click)="guardarUsuario(usuario) " type="button " class="btn btn-outline-primary">
+                                <i class="fa fa-save "></i> Guardar
+                            </button>
+                        <button (click)="activarUsuario(usuario) " class="btn btn-outline-success">
+                                    <i class="fa fa-check-circle "></i> Activar
+                                </button>
+                        <button (click)="desactivarUsuario(usuario) " type="button " class="btn btn-outline-warning">
+                                <i class="fa fa-times-circle "></i> Desactivar
+                            </button>
+                        <button (click)="borrarUsuario(usuario) " type="button " class="btn btn-outline-danger">
+                                            <i class="fa fa-trash-alt "></i> Borrar
+                                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="clearfix "></div>
+    </div>
+    <br>
+    <button (click)="cambiarDesde(-5) " type="button " class="btn btn-info ">
+            <i class="fa fa-arrow-left "></i>  Anterior
+        </button>
+    <button (click)="cambiarDesde(5) " type="button " class="btn btn-info ">
+            Siguiente  <i class="fa fa-arrow-right "></i>
+        </button>
+    <br><br>
+</div>
