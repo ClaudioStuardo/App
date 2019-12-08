@@ -31,8 +31,17 @@ export class HomeComponent implements OnInit {
     this._modalUploadService.notificacion.subscribe(resp => this.cargarUsuarios() );
   }
 
-  mostrarModal( id: string ){
-    this._modalUploadService.mostrarModal( 'usuarios', id );
+  mostrarModal( id: string, activo: boolean ) {
+    if ( activo ) {
+      this._modalUploadService.mostrarModal( 'usuarios', id );
+    } else {
+      Swal.fire(
+        'Error al subir imagen',
+        'El usuario está desactivado',
+        'error'
+      );
+      return;
+    }
   }
 
   cargarUsuarios() {
@@ -78,7 +87,7 @@ export class HomeComponent implements OnInit {
 
     this.usuarioDB = usuario;
 
-    if ( usuario.activo === false ) {
+    if ( !usuario.activo ) {
       Swal.fire(
         'Error al desactivar usuario',
         'El usuario ya está desactivo',

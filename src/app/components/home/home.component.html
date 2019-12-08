@@ -33,7 +33,7 @@
             <div class="row">
                 <div class="col-6">
                     <div class="image-wrap">
-                        <img (click)="mostrarModal(usuario._id)" [src]="usuario.imagen | imagen" class="pointer w150">
+                        <img (click)="mostrarModal(usuario._id, usuario.activo)" [src]="usuario.imagen | imagen" class="pointer w150">
                     </div>
                     <span class=" date ">
                 <label *ngIf="!usuario.activo" style="color:red" class="label label-danger "><i class="fa fa-times-circle "></i>  Desactivo</label>
